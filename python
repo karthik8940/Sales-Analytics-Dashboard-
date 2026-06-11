@@ -1,1 +1,62 @@
+python code to read and clean the data 
 
+
+Step 1: Import Libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+Step 2: Load Dataset
+df = pd.read_csv("Superstore.csv", encoding="latin1")
+
+Step 3: Understand Dataset
+Dataset Shape
+             df.shape
+Column Names
+             Column Names
+Data Types
+             df.info()
+
+Step 4: Check Missing Values
+df.isnull().sum()
+
+If missing values exist:
+df.dropna(inplace=True)
+or
+df.fillna(0, inplace=True)
+
+Step 5: Check Duplicate Rows
+df.duplicated().sum()
+
+Remove duplicates:
+df.drop_duplicates(inplace=True)
+
+Step 6: Basic Analysis
+Total Sales
+df["Sales"].sum()
+Total Profit
+df["Profit"].sum()
+Total Customers
+df["Customer Name"].nunique()
+
+Step 7: Exploratory Data Analysis
+Sales by Category
+sales_category = df.groupby("Category")["Sales"].sum()
+print(sales_category)
+Sales by Region
+sales_region = df.groupby("Region")["Sales"].sum()
+print(sales_region)sales_region = df.groupby("Region")["Sales"].sum()
+print(sales_region)
+Top 10 Products
+top_products = df.groupby(
+    "Product Name"
+)["Sales"].sum().sort_values(
+    ascending=False
+).head(10)
+
+print(top_products)
+Step 8: Save Cleaned Data
+df.to_csv(
+    "clean_superstore.csv",
+    index=False
+)
